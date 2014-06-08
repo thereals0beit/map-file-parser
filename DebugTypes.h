@@ -35,5 +35,5 @@ public:
 /*! The Relocation class */
 class Relocation : public Data {
 public:
-	unsigned long type;
+	unsigned long reltype;
 };
