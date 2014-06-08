@@ -42,6 +42,9 @@ VOID MAPFile::Parse(MAPData* data)
 
 		if(r == MAPPARSE_OK) {
 			idx++;
+		} else if(r == MAPPARSE_FAILURE) {
+			// Ignore the failure? or break?
+			break;
 		}
 	}
 }
@@ -111,7 +114,6 @@ VOID MAPFile::ParseLine(MAPData *data, int index, std::string line, MAPParseLine
 		ns.typeclass = (linedata[3].compare("CODE") == 0) ? TypeClass::CLASS_CODE : TypeClass::CLASS_DATA;
 
 		data->sections.push_back(ns);
-
 		return;
 	}
 
@@ -137,6 +139,7 @@ VOID MAPFile::ParseLine(MAPData *data, int index, std::string line, MAPParseLine
 		}
 
 		ParseDataLine(data, line, linedata);
+		return;
 	}
 
 	*result = MAPPARSE_FAILURE;
